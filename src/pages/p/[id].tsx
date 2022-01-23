@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/Layout";
 import { PostProps } from "../../components/Post";
-import prisma from "../../lib/prisma";
+import prisma from "../../../lib/prisma";
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await prisma.post.findUnique({

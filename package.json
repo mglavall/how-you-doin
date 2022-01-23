@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^2.24.1",
+    "@stitches/react": "^0.1.9",
     "next": "9.5.5",
     "next-auth": "^3.25.0",
     "react": "16.14.0",
