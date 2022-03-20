@@ -1,6 +1,6 @@
-import { createCss } from "@stitches/react";
+import { createStitches } from "@stitches/react";
 
-export const { styled, css } = createCss({
+export const { styled, css } = createStitches({
   theme: {
     fonts: {
       system: "system-ui",
@@ -12,7 +12,7 @@ export const { styled, css } = createCss({
       secondary: "#0b0b0b",
       tertiary: "#903749",
       alternative: "#53354a",
-      backgroundColor: "#0b0b0b",
+      backgroundColor: "#eaf0cb",
     },
     fontSizes: {
       1: "14px",

@@ -8,7 +8,7 @@ const Stack = styled("div", {
         flexDirection: "column",
       },
       row: {
-        fontSize: "row",
+        flexDirection: "row",
       },
     },
     alignItems: {

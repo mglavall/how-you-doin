@@ -1,13 +1,17 @@
+import { styled } from "@stitches/react";
 import React, { ReactNode } from "react";
-import Header from "./Header";
 
 type Props = {
   children: ReactNode;
 };
 
+const Background = styled("div", {
+  backgroundColor: "$backgroundColor",
+  height: "100vh",
+});
+
 const Layout: React.FC<Props> = (props) => (
-  <div>
-    <Header />
+  <Background>
     <div className="layout">{props.children}</div>
     <style jsx global>{`
       html {
@@ -44,7 +48,7 @@ const Layout: React.FC<Props> = (props) => (
         padding: 0 2rem;
       }
     `}</style>
-  </div>
+  </Background>
 );
 
 export default Layout;
