@@ -11,7 +11,7 @@ generator client {
 }
 
 model Post {
-  id        Int     @default(autoincrement()) @id
+  id        Int     @id @default(autoincrement())
   title     String
   content   String?
   published Boolean @default(false)
@@ -19,21 +19,37 @@ model Post {
   authorId  Int?
 }
 
+model MoodDay {
+  id             Int          @id @default(autoincrement())
+  date           DateTime
+  moodCalendarId Int
+  MoodCalendar   MoodCalendar @relation(fields: [moodCalendarId], references: [id])
+}
+
+model MoodCalendar {
+  id   Int       @id @default(autoincrement())
+  days MoodDay[]
+  User User[]
+}
+
 model User {
-  id            Int       @default(autoincrement()) @id
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map(name: "email_verified")
-  image         String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
-  password      String
+  id             Int          @id @default(autoincrement())
+  name           String?
+  email          String?      @unique
+  emailVerified  DateTime?    @map(name: "email_verified")
+  image          String?
+  createdAt      DateTime     @default(now()) @map(name: "created_at")
+  updatedAt      DateTime     @updatedAt @map(name: "updated_at")
+  posts          Post[]
+  moodCalendar   MoodCalendar @relation(fields: [moodCalendarId], references: [id])
+  password       String
+  moodCalendarId Int
+
   @@map(name: "users")
 }
 
 model Account {
-  id                 Int       @default(autoincrement()) @id
+  id                 Int       @id @default(autoincrement())
   compoundId         String    @unique @map(name: "compound_id")
   userId             Int       @map(name: "user_id")
   providerType       String    @map(name: "provider_type")
@@ -45,15 +61,15 @@ model Account {
   createdAt          DateTime  @default(now()) @map(name: "created_at")
   updatedAt          DateTime  @default(now()) @map(name: "updated_at")
 
+
   @@index([providerAccountId], name: "providerAccountId")
   @@index([providerId], name: "providerId")
   @@index([userId], name: "userId")
-
   @@map(name: "accounts")
 }
 
 model Session {
-  id           Int      @default(autoincrement()) @id
+  id           Int      @id @default(autoincrement())
   userId       Int      @map(name: "user_id")
   expires      DateTime
   sessionToken String   @unique @map(name: "session_token")

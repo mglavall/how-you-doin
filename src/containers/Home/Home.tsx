@@ -12,7 +12,8 @@ export const Home = () => {
 };
 
 export async function getServerSideProps() {
+  debugger;
   console.log("HOLA?");
-  const session = await axios.get("/session");
+  const session = await axios.get("api/calendar");
   console.log(session);
 }
