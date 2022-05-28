@@ -8,9 +8,7 @@ import axios from "axios";
 
 export default Home;
 export async function getServerSideProps() {
-    debugger;
-    console.log("HOLA?");
-    const {data} = await axios.get("http://localhost:3000/api/calendar");
- 
-    return {props: {data}}
+    const {data:{data}} = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_PATH}/api/calendar`);
+    console.log(data)
+    return {props:{calendar: {days: data}}}
   }

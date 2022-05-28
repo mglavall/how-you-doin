@@ -21,7 +21,9 @@ model Post {
 
 model MoodDay {
   id             Int          @id @default(autoincrement())
-  date           DateTime
+  rating         Int          @default(0)
+  date           DateTime     @unique @default(now())
+  createdAt      DateTime     @default(now())
   moodCalendarId Int
   MoodCalendar   MoodCalendar @relation(fields: [moodCalendarId], references: [id])
 }
