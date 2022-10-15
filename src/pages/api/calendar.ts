@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         const calendar = await prisma.moodCalendar.findFirst();
         const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } })
 
-        res.status(200).json({ data: days });
+        res.status(200).json({ data: days.map((day) => ({ ...day, date: dayjs(day.date).format("YYYY-MM-DD") })) });
     }
 
 }
