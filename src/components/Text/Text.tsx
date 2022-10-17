@@ -1,23 +1,22 @@
 import { styled } from "../../styles/stitches.config";
 
 const Text = styled("span", {
-  fontSize: "$1",
   color: "$primary",
   variants: {
     size: {
-      $1: {
+      1: {
         fontSize: "$1",
       },
-      $2: {
+      2: {
         fontSize: "$2",
       },
-      $3: {
+      3: {
         fontSize: "$3",
       },
-      $4: {
+      4: {
         fontSize: "$4",
       },
-      $7: {
+      7: {
         fontSize: "$7",
       },
     },
@@ -30,8 +29,8 @@ const Text = styled("span", {
       },
     },
     fontFamily: {
-      $primary: { fontFamily: "$primary" },
-      $secondary: { fontFamily: "$secondary" },
+      primary: { fontFamily: "$primary" },
+      secondary: { fontFamily: "$secondary" },
     },
   },
 });

@@ -24,8 +24,8 @@ const Flex = styled("div", {
   gap: "8px",
 });
 
-const Good = styled("div", {
-  backgroundColor: "#3cb043",
+const MoodSelectorButton = styled("div", {
+  cursor: "pointer",
   width: "100px",
   height: "100px",
   variants: {
@@ -40,21 +40,6 @@ const Good = styled("div", {
   },
 });
 
-const Bad = styled("div", {
-  backgroundColor: "#b90e0a",
-  width: "100px",
-  height: "100px",
-  variants: {
-    selected: {
-      true: {
-        border: "2px solid black",
-      },
-      false: {
-        border: "none",
-      },
-    },
-  },
-});
 export const Home = ({ calendar }) => {
   const [ratingSelected, selectRating] = useState(null);
   const [localCalendar, setCalendar] = useState(calendar);
@@ -64,16 +49,21 @@ export const Home = ({ calendar }) => {
   console.log(showButton);
   return (
     <Container>
-      How are you feeling today?
+      <Text size="4" fontFamily="secondary" as="h1">
+        How are you feeling today?
+      </Text>
       <Calendar days={localCalendar.days}></Calendar>
-      Choose mood for today:
+      <Text size="3" fontFamily="secondary" as="h2">
+        Choose mood for today:
+      </Text>
       <Flex>
-        <Good selected={ratingSelected === 5} onClick={() => selectRating(5)}>
-          hola
-        </Good>
-        <Bad selected={ratingSelected === 1} onClick={() => selectRating(1)}>
-          hola
-        </Bad>
+        {[...new Array(10)].map((v, i) => (
+          <MoodSelectorButton
+            selected={ratingSelected === i + 1}
+            onClick={() => selectRating(i + 1)}
+            css={{ backgroundColor: `$mood${i + 1}` }}
+          ></MoodSelectorButton>
+        ))}
       </Flex>
       <button
         onClick={async () => {

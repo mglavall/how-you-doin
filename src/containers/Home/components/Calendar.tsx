@@ -2,45 +2,27 @@ import { styled } from "@stitches/react";
 
 const Grid = styled("div", {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, 200px)",
+  gridTemplateColumns: "repeat(auto-fill, 20px)",
   gap: "$1",
   "& div": {},
 });
 
 const Day = styled("div", {
-  backgroundColor: "$tertiary",
-  height: "200px",
+  height: "20px",
   borderRadius: "$3",
-  variants: {
-    rating: {
-      1: {
-        backgroundColor: "$tertiary",
-      },
-      2: {
-        backgroundColor: "blue",
-      },
-      3: {
-        backgroundColor: "green",
-      },
-      4: {
-        backgroundColor: "green",
-      },
-      5: {
-        backgroundColor: "green",
-      },
-    },
-  },
 });
 
 export const Calendar = ({ days }) => {
+  console.log(days);
   return (
     <Grid>
       {days.map((day) => (
-        <Day key={day.id} rating={day.rating}>
-          {" "}
-          {console.log(day)}
-          {day.rating}
-        </Day>
+        <Day
+          key={day.id}
+          css={{
+            backgroundColor: day.rating ? `$mood${day.rating}` : `$moodNone`,
+          }}
+        ></Day>
       ))}
     </Grid>
   );

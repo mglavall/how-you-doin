@@ -11,10 +11,28 @@ export default async function handler(req, res) {
         res.status(200).json({ data: m });
         // Process a POST request
     } else {
+        let day = dayjs().subtract(8, 'month');
         const calendar = await prisma.moodCalendar.findFirst();
-        const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } })
+        const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } });
+        let data = [];
 
-        res.status(200).json({ data: days.map((day) => ({ ...day, date: dayjs(day.date).format("YYYY-MM-DD") })) });
+        do {
+            const sameDay = days.find((a) => dayjs(a.date).isSame(day, "day"))
+
+            if (sameDay) {
+                data.push({ ...sameDay, date: dayjs(sameDay.date).format("YYYY-MM-DD") })
+            } else {
+                data.push({ rating: null, date: day.format("YYYY-MM-DD") });
+            }
+            day = day.add(1, "day")
+
+        } while (!day.isAfter(dayjs(), "day"))
+
+        console.log("hola", data);
+
+
+
+        res.status(200).json({ data });
     }
 
 }
