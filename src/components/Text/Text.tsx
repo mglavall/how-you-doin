@@ -36,7 +36,7 @@ const Text = styled("span", {
 });
 
 Text.defaultProps = {
-  fontFamily: "$primary",
+  fontFamily: "primary",
 };
 
 export default Text;
