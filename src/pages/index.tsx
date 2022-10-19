@@ -5,6 +5,6 @@ export default Home;
 export async function getServerSideProps() {
   const {
     data: { data },
-  } = await axios.get(`/api/calendar`);
+  } = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_PATH}/api/calendar`);
   return { props: { calendar: { days: data } } };
 }
