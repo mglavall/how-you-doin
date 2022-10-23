@@ -11,10 +11,14 @@ const Grid = styled("div", {
 const Day = styled("div", {
   height: "20px",
   borderRadius: "$3",
+  cursor: "pointer",
+  "&:hover": {
+    border: "2px solid $slate8",
+  },
 });
 
-export const Calendar = ({ days }) => {
-  console.log(days);
+export const Calendar = ({ days, daySelected, onSelectDay }) => {
+  console.log(daySelected);
   return (
     <Grid>
       {days.map((day) => (
@@ -23,6 +27,10 @@ export const Calendar = ({ days }) => {
             key={day.id}
             css={{
               backgroundColor: day.rating ? `$mood${day.rating}` : `$moodNone`,
+              border: daySelected === day.date && "2px solid $slate8",
+            }}
+            onClick={() => {
+              onSelectDay(day.date);
             }}
           ></Day>
         </Tooltip>

@@ -8,7 +8,6 @@ dayjs.extend(utc);
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         const startOfDay = dayjs(req.body.date).utc().startOf("day").toDate();
-        console.log("start", startOfDay);
         //Creates a mood for the day or updates it in case it exists already
         const m = await prisma.moodDay.upsert({ where: { date: startOfDay }, update: { rating: req.body.rating }, create: { moodCalendarId: 1, rating: req.body.rating, date: startOfDay } })
         res.status(200).json({ data: m });
@@ -18,7 +17,7 @@ export default async function handler(req, res) {
         const calendar = await prisma.moodCalendar.findFirst();
         const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } });
         let data = [];
-        console.log(days)
+
         do {
             const sameDay = days.find((a) => dayjs(a.date).isSame(day, "day"))
 

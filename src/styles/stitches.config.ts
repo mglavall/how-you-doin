@@ -1,3 +1,4 @@
+import { slate, slateDark } from "@radix-ui/colors";
 import { createStitches } from "@stitches/react";
 
 export const { styled, css, getCssText } = createStitches({
@@ -8,11 +9,13 @@ export const { styled, css, getCssText } = createStitches({
       secondary: "AkzidenzGrotesk",
     },
     colors: {
+      ...slate,
       primary: "#000",
       secondary: "#0b0b0b",
       tertiary: "#903749",
       alternative: "#53354a",
       backgroundColor: "#eaf0cb",
+      grey100: "$primary",
       mood1: "#3D348B",
       mood2: "#5A56BC",
       mood3: "#7678ED",
@@ -23,7 +26,7 @@ export const { styled, css, getCssText } = createStitches({
       mood8: "#F27103",
       mood9: "#F75800",
       mood10: "#f22e05",
-      moodNone: "#eee",
+      moodNone: "$slate3",
     },
     fontSizes: {
       1: "14px",
@@ -88,5 +91,6 @@ export const { styled, css, getCssText } = createStitches({
     }),
   },
 });
+
 
 

@@ -6,10 +6,10 @@ import dayjs from "dayjs";
 import { styled } from "@stitches/react";
 import { useState } from "react";
 
-const uploadMood = async (mood: string) => {
+const uploadMood = async (mood: string, date = new Date()) => {
   const data = {
     rating: mood,
-    date: dayjs(new Date()).toDate(),
+    date: dayjs(date).toDate(),
   };
   const response = await axios.post("api/calendar", data);
 };
@@ -41,6 +41,7 @@ const MoodSelectorButton = styled("div", {
 });
 
 export const Home = ({ calendar }) => {
+  const [selectedDate, selectDate] = useState(null);
   const [ratingSelected, selectRating] = useState(null);
   const [localCalendar, setCalendar] = useState(calendar);
   const showButton = dayjs().isSame(
@@ -52,7 +53,13 @@ export const Home = ({ calendar }) => {
       <Text size="4" fontFamily="secondary" as="h1">
         How are you feeling today?
       </Text>
-      <Calendar days={localCalendar.days}></Calendar>
+      <Calendar
+        days={localCalendar.days}
+        onSelectDay={(dayToSelect) => {
+          selectDate(dayToSelect);
+        }}
+        daySelected={selectedDate}
+      ></Calendar>
       <Text size="3" fontFamily="secondary" as="h2">
         Choose mood for today:
       </Text>
