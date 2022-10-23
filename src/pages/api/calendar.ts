@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         res.status(200).json({ data: m });
         // Process a POST request
     } else {
-        let day = dayjs().subtract(8, 'month');
+        let day = dayjs().subtract(8, 'month').utc();
         const calendar = await prisma.moodCalendar.findFirst();
         const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } });
         let data = [];
