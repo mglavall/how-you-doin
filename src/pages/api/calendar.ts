@@ -22,8 +22,6 @@ export default async function handler(req, res) {
             const sameDay = days.find((a) => dayjs.utc(a.date).isSame(day, "day"))
 
             if (sameDay) {
-                console.log(day);
-                console.log(dayjs(days[0].date));
                 data.push({ ...sameDay, date: dayjs(sameDay.date).format("YYYY-MM-DD") })
             } else {
                 data.push({ rating: null, date: day.format("YYYY-MM-DD") });
