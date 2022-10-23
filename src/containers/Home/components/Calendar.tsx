@@ -3,9 +3,10 @@ import { Tooltip } from "~/src/components/Tooltip/Tooltip";
 
 const Grid = styled("div", {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, 20px)",
+  gridTemplateRows: "repeat(7,20px)",
+  gridTemplateColumns: "repeat(auto-fill,20px)",
+  gridAutoFlow: "column",
   gap: "$1",
-  "& div": {},
 });
 
 const Day = styled("div", {

@@ -18,6 +18,7 @@ const uploadMood = async (mood: string, date = dayjs()) => {
 const Container = styled("div", {
   maxWidth: "1200px",
   margin: "auto",
+  padding: "$5 $2",
 });
 
 const Flex = styled("div", {
@@ -27,8 +28,9 @@ const Flex = styled("div", {
 
 const MoodSelectorButton = styled("div", {
   cursor: "pointer",
-  width: "100px",
-  height: "100px",
+  width: "calc(100%/10 - 64px/10)",
+  aspectRatio: "1/1",
+
   variants: {
     selected: {
       true: {
@@ -60,10 +62,7 @@ export const Home = ({ calendar }) => {
         }}
         daySelected={selectedDate}
       ></Calendar>
-      <Text size="3" fontFamily="secondary" as="h2">
-        Choose mood for today:
-      </Text>
-      <Flex>
+      <Flex css={{ marginTop: "$6" }}>
         {[...new Array(10)].map((v, i) => (
           <MoodSelectorButton
             selected={ratingSelected === i + 1}
