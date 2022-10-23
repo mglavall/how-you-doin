@@ -1,4 +1,5 @@
 import { styled } from "@stitches/react";
+import { Tooltip } from "~/src/components/Tooltip/Tooltip";
 
 const Grid = styled("div", {
   display: "grid",
@@ -17,12 +18,14 @@ export const Calendar = ({ days }) => {
   return (
     <Grid>
       {days.map((day) => (
-        <Day
-          key={day.id}
-          css={{
-            backgroundColor: day.rating ? `$mood${day.rating}` : `$moodNone`,
-          }}
-        ></Day>
+        <Tooltip content={day.date}>
+          <Day
+            key={day.id}
+            css={{
+              backgroundColor: day.rating ? `$mood${day.rating}` : `$moodNone`,
+            }}
+          ></Day>
+        </Tooltip>
       ))}
     </Grid>
   );
