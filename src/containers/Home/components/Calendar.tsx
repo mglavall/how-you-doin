@@ -18,7 +18,6 @@ const Day = styled("div", {
 });
 
 export const Calendar = ({ days, daySelected, onSelectDay }) => {
-  console.log(daySelected);
   return (
     <Grid>
       {days.map((day) => (

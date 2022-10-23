@@ -7,9 +7,9 @@ dayjs.extend(utc);
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const startOfDay = dayjs(req.body.date).utc().startOf("day").toDate();
+        const date = dayjs(req.body.date, "YYYY-MM-DD").utc(true).toDate();
         //Creates a mood for the day or updates it in case it exists already
-        const m = await prisma.moodDay.upsert({ where: { date: startOfDay }, update: { rating: req.body.rating }, create: { moodCalendarId: 1, rating: req.body.rating, date: startOfDay } })
+        const m = await prisma.moodDay.upsert({ where: { date }, update: { rating: req.body.rating }, create: { moodCalendarId: 1, rating: req.body.rating, date } })
         res.status(200).json({ data: m });
         // Process a POST request
     } else {

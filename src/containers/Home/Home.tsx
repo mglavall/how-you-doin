@@ -6,11 +6,12 @@ import dayjs from "dayjs";
 import { styled } from "@stitches/react";
 import { useState } from "react";
 
-const uploadMood = async (mood: string, date = new Date()) => {
+const uploadMood = async (mood: string, date = dayjs()) => {
   const data = {
     rating: mood,
-    date: dayjs(date).toDate(),
+    date: date.format("YYYY-MM-DD"),
   };
+  console.log(data, date);
   const response = await axios.post("api/calendar", data);
 };
 
@@ -41,13 +42,12 @@ const MoodSelectorButton = styled("div", {
 });
 
 export const Home = ({ calendar }) => {
-  const [selectedDate, selectDate] = useState(null);
+  const [selectedDate, selectDate] = useState(dayjs().format("YYYY-MM-DD"));
   const [ratingSelected, selectRating] = useState(null);
   const [localCalendar, setCalendar] = useState(calendar);
   const showButton = dayjs().isSame(
     localCalendar.days[localCalendar.days.length - 1]?.date
   );
-  console.log(showButton);
   return (
     <Container>
       <Text size="4" fontFamily="secondary" as="h1">
@@ -74,7 +74,8 @@ export const Home = ({ calendar }) => {
       </Flex>
       <button
         onClick={async () => {
-          await uploadMood(ratingSelected);
+          console.log(selectedDate);
+          await uploadMood(ratingSelected, dayjs(selectedDate, "YYYY-MM-DD"));
           const {
             data: { data },
           } = await axios.get("api/calendar");
