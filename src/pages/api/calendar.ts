@@ -13,11 +13,11 @@ export default async function handler(req, res) {
         res.status(200).json({ data: m });
         // Process a POST request
     } else {
-        let day = dayjs().utc(true).subtract(8, 'month');
+        let day = dayjs().utc(true).subtract(8, 'month').day(0);
+
         const calendar = await prisma.moodCalendar.findFirst();
         const days = await prisma.moodDay.findMany({ where: { moodCalendarId: calendar.id } });
         let data = [];
-
         do {
             const sameDay = days.find((a) => dayjs.utc(a.date).isSame(day, "day"))
 
