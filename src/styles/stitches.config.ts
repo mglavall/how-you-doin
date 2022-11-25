@@ -50,7 +50,8 @@ export const { styled, css, getCssText } = createStitches({
       1: "2px",
       2: "4px",
       3: "6px"
-    }
+    },
+
   },
   utils: {
     m: (config) => (value) => ({
@@ -89,6 +90,11 @@ export const { styled, css, getCssText } = createStitches({
     br: (config) => (value) => ({
       borderRadius: value,
     }),
+  },
+  media: {
+    bp1: '(min-width: 640px)',
+    bp2: '(min-width: 768px)',
+    bp3: '(min-width: 1024px)',
   },
 });
 

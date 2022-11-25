@@ -5,6 +5,7 @@ import { Login } from "./components/Login";
 import dayjs from "dayjs";
 import { styled } from "@stitches/react";
 import { useState } from "react";
+import { Button } from "~/src/components/Button/Button";
 
 const uploadMood = async (mood: string, date = dayjs()) => {
   const data = {
@@ -71,18 +72,22 @@ export const Home = ({ calendar }) => {
           ></MoodSelectorButton>
         ))}
       </Flex>
-      <button
+
+      <Button
         onClick={async () => {
-          console.log(selectedDate);
           await uploadMood(ratingSelected, dayjs(selectedDate, "YYYY-MM-DD"));
           const {
             data: { data },
           } = await axios.get("api/calendar");
           setCalendar({ days: data });
         }}
+        css={{
+          marginTop: "$6",
+          "&:hover": { backgroundColor: `$mood${ratingSelected}` },
+        }}
       >
         Confirm
-      </button>
+      </Button>
     </Container>
   );
 };
