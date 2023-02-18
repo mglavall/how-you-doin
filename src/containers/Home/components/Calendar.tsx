@@ -33,6 +33,7 @@ const Day = styled("div", {
 const MonthDivider = styled("div", {
   height: `20px`,
   gridColumn: `1 / span 7`,
+  marginBottom: `$1`,
 });
 
 export const Calendar = ({ days, daySelected, onSelectDay }) => {
