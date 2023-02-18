@@ -48,9 +48,7 @@ export const Home = ({ calendar }) => {
   const [selectedDate, selectDate] = useState(dayjs().format("YYYY-MM-DD"));
   const [ratingSelected, selectRating] = useState(null);
   const [localCalendar, setCalendar] = useState(calendar);
-  const showButton = dayjs().isSame(
-    localCalendar.days[localCalendar.days.length - 1]?.date
-  );
+
   return (
     <Container>
       <Text size="4" fontFamily="secondary" as="h1">
